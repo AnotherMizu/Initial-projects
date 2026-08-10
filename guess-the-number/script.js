@@ -1,10 +1,9 @@
-
 const startBoton = document.getElementById("startBoton");
 const userGuessInput = document.getElementById("userGuess");
 let computer_number;
 let currentRep = 0
 const above = "te pasaste"
-const below = "te falta"
+const below = "te falto"
 
 startBoton.addEventListener("click", function () {
     document.getElementById("toShow").style.display = "";
@@ -40,7 +39,7 @@ function game() {
     const userGuess = Number(userGuessInput.value);
 
     if (userGuess === computer_number) {
-        alert("YOU WIN");
+        hintsToTheUser("You win", userGuess)
     } else if (userGuess > computer_number) {
         hintsToTheUser(above, userGuess)
     } else {
@@ -49,9 +48,21 @@ function game() {
 }
 
 function hintsToTheUser(text, guess) {
-    const newText = document.createTextNode([text, guess] + <br>)
-    const userHints = document.getElementById("userHints")
+    if (text !== "You win"){
+        let newText = document.createElement("p");
+        newText.textContent = "Tu dijiste " + guess + " pero " + text;
+        let userHints = document.getElementById("userHints");
+        userHints.appendChild(newText);
 
-    userHints.appendChild(newText)
+    }
+
+    if (text === "You win"){
+        let newText = document.createElement("h1")
+        newText.textContent = "YOU WIN"
+        let userHints = document.getElementById("userHints");
+        userHints.appendChild(newText);
+
+    }
     
+
 }
